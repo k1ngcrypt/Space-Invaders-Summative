@@ -12,8 +12,8 @@ export class MainMenu extends Scene
 
         this.add.image(window.innerWidth/2, window.innerHeight/2, 'logo');
 
-        this.add.text(512, 460, 'Main Menu', {
-            fontFamily: 'Arial Black', fontSize: 38, color: '#ffffff',
+        this.add.text(window.innerWidth/2, window.innerHeight/3*2, 'SPACE INVADERS', {
+            font-family: "Workbench", fontSize: 38, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0.5);
