@@ -7,11 +7,6 @@ export class Boot extends Scene
         super('Boot');
     }
 
-    preload ()
-    {
-        
-    }
-
     create ()
     {
         this.scene.start('Preloader');
