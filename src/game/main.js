@@ -17,6 +17,11 @@ const config = {
         mode: Phaser.Scale.RESIZE, // resizes with window
         autoCenter: Phaser.Scale.CENTER_BOTH // optional: center canvas
     },
+
+    physics: {
+        default: 'arcade'
+    },
+
     scene: [
         Boot,
         Preloader,
