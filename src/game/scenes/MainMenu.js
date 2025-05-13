@@ -13,6 +13,11 @@ export class MainMenu extends Scene {
             fontFamily: 'Workbench, sans-serif', fontSize: 38, color: '#FFFFFF',
             stroke: '#000000', strokeThickness: 15,
             align: 'center'
+                  
+            setInterval (() => {current += full[i++];
+            Display.setText(current); }, 100); 
+        
+            
         }).setOrigin(0.5);
 let spaceKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.input.once(spaceKey.isDown, () => {
