@@ -15,9 +15,14 @@ export class MainMenu extends Scene {
             align: 'center'
         }).setOrigin(0.5);
 
-        setInterval (() => {current += full[i++];
-            Display.setText(current); 
-        }, 100); 
+
+        setInterval(() => {
+            current += full[i++];
+            Display.setText(current);
+        }, 100);
+
+
+
 
         this.input.once('pointerdown', () => {
 
