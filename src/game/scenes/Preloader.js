@@ -27,10 +27,7 @@ export class Preloader extends Scene
     preload ()
     {
         //  Load the assets for the game - Replace with your own assets
-        this.load.setPath('assets');
-
-        this.load.image('logo', 'logo.png');
-
+        this.load.setPath('assets/Sprites/Invaders');
         // anims
         this.load.image('A1', 'A1.png');
         this.load.image('A2', 'A2.png');
@@ -45,6 +42,51 @@ export class Preloader extends Scene
         this.load.image('PlayerExplosion', 'PlayerExplosion.png');
         this.load.image('ShieldFull', 'ShieldFull.png');
         this.load.image('UFO', 'UFO.png');
+
+        // Load projectile images
+        this.load.setPath('assets/Sprites/Projectiles');
+
+        // Main projectile images
+        this.load.image('missile_1', 'missile_1.png');
+        this.load.image('missile_2', 'missile_2.png');
+        this.load.image('missile_3', 'missile_3.png');
+        this.load.image('missile_4', 'missile_4.png');
+        this.load.image('Projectile_Player', 'Projectile_Player.png');
+        this.load.image('ProjectileA_2', 'ProjectileA__2.png');
+        this.load.image('ProjectileA_1', 'ProjectileA_1.png');
+        this.load.image('ProjectileA_3', 'ProjectileA_3.png');
+        this.load.image('ProjectileA_4', 'ProjectileA_4.png');
+        this.load.image('ProjectileB_1', 'ProjectileB_1.png');
+        this.load.image('ProjectileB_2', 'ProjectileB_2.png');
+        this.load.image('ProjectileB_3', 'ProjectileB_3.png');
+        this.load.image('ProjectileB_4', 'ProjectileB_4.png');
+        this.load.image('ProjectileC_1', 'ProjectileC_1.png');
+        this.load.image('ProjectileC_2', 'ProjectileC_2.png');
+        this.load.image('ProjectileC_3', 'ProjectileC_3.png');
+        this.load.image('ProjectileC_4', 'ProjectileC_4.png');
+
+        // Subfolder projectile images
+        this.load.setPath('assets/Sprites/Projectiles/ProjectileA');
+        this.load.image('ProjectileA_1', '1.png');
+        this.load.image('ProjectileA_2', '2.png');
+        this.load.image('ProjectileA_3', '3.png');
+        this.load.image('ProjectileA_4', '4.png');
+        this.load.image('ProjectileA_Layer1', 'Layer 1.png');
+        this.load.image('ProjectileA_Layer2', 'Layer 2 copy 3.png');
+
+        this.load.setPath('assets/Sprites/Projectiles/ProjectileB');
+        this.load.image('ProjectileB_1', '1.png');
+        this.load.image('ProjectileB_2', '2.png');
+        this.load.image('ProjectileB_3', '3.png');
+        this.load.image('ProjectileB_4', '4.png');
+        this.load.image('ProjectileB_Layer1', 'Layer 1.png');
+
+        this.load.setPath('assets/Sprites/Projectiles/ProjectileC');
+        this.load.image('ProjectileC_1', '1.png');
+        this.load.image('ProjectileC_2', '2.png');
+        this.load.image('ProjectileC_3', '3.png');
+        this.load.image('ProjectileC_4', '4.png');
+        this.load.image('ProjectileC_Layer1', 'Layer 1.png');
     }
 
     create ()

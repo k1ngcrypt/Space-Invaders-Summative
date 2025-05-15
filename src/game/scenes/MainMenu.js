@@ -6,9 +6,6 @@ export class MainMenu extends Scene {
     }
 
     create() {
-        // Add logo image
-        this.add.image(window.innerWidth / 2, window.innerHeight / 2, 'logo');
-
         // Add title text
         const titleText = this.add.text(
             window.innerWidth / 2,
@@ -65,7 +62,7 @@ export class MainMenu extends Scene {
                     subTitleText.setText(current);
                 }
             },
-            repeat: full1.length - 1;
+            repeat: full1.length - 1
         });
 
         // Add space key input to start the game
