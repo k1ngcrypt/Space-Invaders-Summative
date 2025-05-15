@@ -12,8 +12,8 @@ export class MainMenu extends Scene {
         // Add title text
         const titleText = this.add.text(
             window.innerWidth / 2,
-            (window.innerHeight / 3) * 2,
-            'SPACE INVADERS',
+            (window.innerHeight / 4) * 3,
+            ' PLAY \nSPACE INVADERS',
             {
                 fontFamily: 'Workbench, sans-serif',
                 fontSize: '38px',
