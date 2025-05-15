@@ -19,6 +19,12 @@ export class Game extends Scene
             align: 'center'
         }).setOrigin(0.5);
 
+        const upKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+        const downKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+        const rightKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+        const leftKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        const spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        
         this.input.once('pointerdown', () => {
 
             this.scene.start('GameOver');
