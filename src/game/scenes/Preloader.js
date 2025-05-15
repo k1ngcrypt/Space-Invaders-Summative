@@ -31,15 +31,43 @@ export class Preloader extends Scene
 
         this.load.image('logo', 'logo.png');
 
-        //main.js
-        
+        // anims
+        this.load.image('A1', 'A1.png');
+        this.load.image('A2', 'A2.png');
+        this.load.image('B1', 'B1.png');
+        this.load.image('B2', 'B2.png');
+        this.load.image('C1', 'C1.png');
+        this.load.image('C2', 'C2.png');
+
+        // Remaining images
+        this.load.image('EnemyExplosion', 'EnemyExplosion.png');
+        this.load.image('Player', 'Player.png');
+        this.load.image('PlayerExplosion', 'PlayerExplosion.png');
+        this.load.image('ShieldFull', 'ShieldFull.png');
+        this.load.image('UFO', 'UFO.png');
     }
 
     create ()
     {
-        //  When all the assets have loaded, it's often worth creating global objects here that the rest of the game can use.
-        //  For example, you can define global animations here, so we can use them in other scenes.
-
+        //global anims
+        this.anims.create({
+            key: 'A-Animation',
+            frames: [{key: 'A1'}, {key: 'A2'}],
+            frameRate: 20,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'B-Animation',
+            frames: [{key: 'B1'}, {key: 'B2'}],
+            frameRate: 20,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'C-Animation',
+            frames: [{key: 'C1'}, {key: 'C2'}],
+            frameRate: 20,
+            repeat: -1
+        });
         //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
         this.scene.start('MainMenu');
     }
