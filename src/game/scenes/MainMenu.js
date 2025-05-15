@@ -12,8 +12,8 @@ export class MainMenu extends Scene {
         // Add title text
         const titleText = this.add.text(
             window.innerWidth / 2,
-            (window.innerHeight / 3) * 2,
-            'SPACE INVADERS',
+            (window.innerHeight / 4) * 3,
+            'PLAY\nSPACE INVADERS',
             {
                 fontFamily: 'Workbench, sans-serif',
                 fontSize: '38px',
@@ -22,11 +22,11 @@ export class MainMenu extends Scene {
                 strokeThickness: 15,
                 align: 'center',
             }
-        ).setOrigin(0.5);
+        ).setOrigin(0.5,0.5);
 
         // Example of animating text (if needed)
         let current = '';
-        const full = 'SPACE INVADERS';
+        const full = 'PLAY\nSPACE INVADERS';
         let i = 0;
 
         this.time.addEvent({
@@ -38,6 +38,34 @@ export class MainMenu extends Scene {
                 }
             },
             repeat: full.length - 1,
+        });
+
+        const subTitleText = this.add.text(
+            window.innerWidth /2 , 
+            (window.innerHeight /5)*3 ,
+            'PRESS SPACE TO START',
+            {
+                fontFamily: 'Workbench, sans-serif',
+                fontSize: '30px',
+                color: '#FFFFFF',
+                strokeThickness: 12,
+                align: 'center'
+            }
+        ).setOrigin(0.5,0.5);
+
+        current = '';
+        const full1 = "PRESS SPACE TO START";
+        i = 0;
+
+        this.time.addEvent({
+            delay: 100,
+            callback: () => {
+                if (i < full1.length) {
+                    current += full1[i++];
+                    subTitleText.setText(current);
+                }
+            },
+            repeat: full1.length - 1;
         });
 
         // Add space key input to start the game
