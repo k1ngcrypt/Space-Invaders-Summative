@@ -47,10 +47,9 @@ export class MainMenu extends Scene {
             }
         ).setOrigin(0.5, 0.5);
 
-        // Subtitle animation variables
-        let currentSub = '';
-        const fullSub = "PRESS SPACE TO START";
-        let iSub = 0;
+        current1 = '';
+        const full1 = "PRESS SPACE TO START";
+        i = 0;
 
         this.time.addEvent({
             delay: 100,
