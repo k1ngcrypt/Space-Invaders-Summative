@@ -7,25 +7,42 @@ export class Preloader extends Scene
         super('Preloader');
     }
 
-    init ()
-    {
-        //  A simple progress bar. This is the outline of the bar.
-        this.add.rectangle((window.innerWidth/2), (window.innerHeight/2), 468, 32).setStrokeStyle(1, 0xffffff);
-
-        //  This is the progress bar itself. It will increase in size from the left based on the % of progress.
-        const bar = this.add.rectangle(512-230, 384, 4, 28, 0xffffff);
-
-        //  Use the 'progress' event emitted by the LoaderPlugin to update the loading bar
-        this.load.on('progress', (progress) => {
-
-            //  Update the progress bar (our bar is 464px wide, so 100% = 464px)
-            bar.width = 4 + (460 * progress);
-
-        });
-    }
-
     preload ()
     {
+        // Center coordinates
+        const centerX = this.cameras.main.width / 2;
+        const centerY = this.cameras.main.height / 2;
+
+        // Progress bar dimensions
+        const barWidth = 468;
+        const barHeight = 32;
+        const innerBarWidth = 464;
+        const innerBarHeight = 28;
+
+        // Outline
+        this.add.rectangle(centerX, centerY, barWidth, barHeight)
+            .setStrokeStyle(2, 0xffffff);
+
+        // Progress bar graphics
+        const progressBar = this.add.graphics();
+
+        // Listen to progress event
+        this.load.on('progress', (progress) => {
+            progressBar.clear();
+            progressBar.fillStyle(0xffffff, 1);
+            progressBar.fillRect(
+                centerX - innerBarWidth / 2,
+                centerY - innerBarHeight / 2,
+                innerBarWidth * progress,
+                innerBarHeight
+            );
+        });
+
+        // Optional: clear bar when complete
+        this.load.on('complete', () => {
+            progressBar.destroy();
+        });
+
         //  Load the assets for the game - Replace with your own assets
         this.load.setPath('assets/Sprites/Invaders');
         // anims
@@ -64,29 +81,6 @@ export class Preloader extends Scene
         this.load.image('ProjectileC_2', 'ProjectileC_2.png');
         this.load.image('ProjectileC_3', 'ProjectileC_3.png');
         this.load.image('ProjectileC_4', 'ProjectileC_4.png');
-
-        // Subfolder projectile images
-        this.load.setPath('assets/Sprites/Projectiles/ProjectileA');
-        this.load.image('ProjectileA_1', '1.png');
-        this.load.image('ProjectileA_2', '2.png');
-        this.load.image('ProjectileA_3', '3.png');
-        this.load.image('ProjectileA_4', '4.png');
-        this.load.image('ProjectileA_Layer1', 'Layer 1.png');
-        this.load.image('ProjectileA_Layer2', 'Layer 2 copy 3.png');
-
-        this.load.setPath('assets/Sprites/Projectiles/ProjectileB');
-        this.load.image('ProjectileB_1', '1.png');
-        this.load.image('ProjectileB_2', '2.png');
-        this.load.image('ProjectileB_3', '3.png');
-        this.load.image('ProjectileB_4', '4.png');
-        this.load.image('ProjectileB_Layer1', 'Layer 1.png');
-
-        this.load.setPath('assets/Sprites/Projectiles/ProjectileC');
-        this.load.image('ProjectileC_1', '1.png');
-        this.load.image('ProjectileC_2', '2.png');
-        this.load.image('ProjectileC_3', '3.png');
-        this.load.image('ProjectileC_4', '4.png');
-        this.load.image('ProjectileC_Layer1', 'Layer 1.png');
     }
 
     create ()
