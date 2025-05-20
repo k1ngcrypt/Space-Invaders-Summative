@@ -37,7 +37,7 @@ export class MainMenu extends Scene {
 
         const subTitleText = this.add.text(
             window.innerWidth / 2,
-            (window.innerHeight / 4) - 10,
+            (window.innerHeight / 4) - 40,
             'PRESS SPACE TO START',
             {
                 fontFamily: 'Workbench, sans-serif',
