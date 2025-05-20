@@ -50,7 +50,7 @@ export class MainMenu extends Scene {
             }
         ).setOrigin(0.5,0.5);
 
-        current = '';
+        current1 = '';
         const full1 = "PRESS SPACE TO START";
         i = 0;
 
@@ -58,8 +58,8 @@ export class MainMenu extends Scene {
             delay: 100,
             callback: () => {
                 if (i < full1.length) {
-                    current += full1[i++];
-                    subTitleText.setText(current);
+                    current1 += full1[i++];
+                    subTitleText.setText(current1);
                 }
             },
             repeat: full1.length - 1
