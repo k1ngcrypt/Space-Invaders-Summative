@@ -110,6 +110,50 @@ export class Preloader extends Scene
             frameRate: 20,
             repeat: -1
         });
+
+        this.anims.create({
+            key: 'Missile-Animation',
+            frames: [{key: 'missile_1'}, {key: 'missile_2'}, {key: 'missile_3'}, {key: 'missile_4'}],
+            frameRate: 20,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'ProjectileA-Animation',
+            frames: [
+            { key: 'ProjectileA_1' },
+            { key: 'ProjectileA_2' },
+            { key: 'ProjectileA_3' },
+            { key: 'ProjectileA_4' }
+            ],
+            frameRate: 20,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'ProjectileB-Animation',
+            frames: [
+            { key: 'ProjectileB_1' },
+            { key: 'ProjectileB_2' },
+            { key: 'ProjectileB_3' },
+            { key: 'ProjectileB_4' }
+            ],
+            frameRate: 20,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'ProjectileC-Animation',
+            frames: [
+            { key: 'ProjectileC_1' },
+            { key: 'ProjectileC_2' },
+            { key: 'ProjectileC_3' },
+            { key: 'ProjectileC_4' }
+            ],
+            frameRate: 20,
+            repeat: -1
+        });
+
         //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
         this.scene.start('MainMenu');
     }

@@ -15,54 +15,52 @@ export class MainMenu extends Scene {
                 fontFamily: 'Workbench, sans-serif',
                 fontSize: '38px',
                 color: '#FFFFFF',
-                stroke: '#000000',
-                strokeThickness: 15,
-                align: 'center',
+                align: 'center'
             }
         ).setOrigin(0.5,0.5);
 
-        // Example of animating text (if needed)
-        let current = '';
-        const full = 'PLAY\nSPACE INVADERS';
-        let i = 0;
+        // Title animation variables
+        let currentTitle = '';
+        const fullTitle = 'PLAY\nSPACE INVADERS';
+        let iTitle = 0;
 
         this.time.addEvent({
             delay: 100,
             callback: () => {
-                if (i < full.length) {
-                    current += full[i++];
-                    titleText.setText(current);
+                if (iTitle < fullTitle.length) {
+                    currentTitle += fullTitle[iTitle++];
+                    titleText.setText(currentTitle);
                 }
             },
-            repeat: full.length - 1,
+            repeat: fullTitle.length - 1,
         });
 
         const subTitleText = this.add.text(
-            window.innerWidth /2 , 
-            (window.innerHeight /5)*3 ,
+            window.innerWidth / 2,
+            (window.innerHeight / 5) * 3,
             'PRESS SPACE TO START',
             {
                 fontFamily: 'Workbench, sans-serif',
                 fontSize: '30px',
                 color: '#FFFFFF',
-                strokeThickness: 12,
                 align: 'center'
             }
-        ).setOrigin(0.5,0.5);
+        ).setOrigin(0.5, 0.5);
 
-        current = '';
-        const full1 = "PRESS SPACE TO START";
-        i = 0;
+        // Subtitle animation variables
+        let currentSub = '';
+        const fullSub = "PRESS SPACE TO START";
+        let iSub = 0;
 
         this.time.addEvent({
             delay: 100,
             callback: () => {
-                if (i < full1.length) {
-                    current += full1[i++];
-                    subTitleText.setText(current);
+                if (iSub < fullSub.length) {
+                    currentSub += fullSub[iSub++];
+                    subTitleText.setText(currentSub);
                 }
             },
-            repeat: full1.length - 1
+            repeat: fullSub.length - 1
         });
 
         // Add space key input to start the game
