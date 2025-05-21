@@ -9,6 +9,7 @@ export class Game extends Scene
 
     create ()
     {
+        let score = 0;
         const upKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         const downKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         const rightKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
@@ -36,6 +37,7 @@ export class Game extends Scene
         function onEnemyHit(enemy, bullet) {
             enemy.destroy();
             bullet.destroy();
+            score++;
         }
 
         this.input.once('pointerdown', () => {
