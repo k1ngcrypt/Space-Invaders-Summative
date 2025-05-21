@@ -89,19 +89,19 @@ export class Preloader extends Scene
         this.anims.create({
             key: 'A-Animation',
             frames: [{key: 'A1'}, {key: 'A2'}],
-            frameRate: 20,
+            frameRate: 3,
             repeat: -1
         });
         this.anims.create({
             key: 'B-Animation',
             frames: [{key: 'B1'}, {key: 'B2'}],
-            frameRate: 20,
+            frameRate: 3,
             repeat: -1
         });
         this.anims.create({
             key: 'C-Animation',
             frames: [{key: 'C1'}, {key: 'C2'}],
-            frameRate: 20,
+            frameRate: 3,
             repeat: -1
         });
 
