@@ -23,8 +23,8 @@ export class Game extends Scene
         for (let i=0; i<12; i++) {
             for (let j=0; j<5; j++) {
                 const enemy = this.enemyGroup.create(
-                    100 + i * 50,
-                    100 + j * 50,
+                    window.innerWidth/8 + i * window.innerWidth/15,
+                    window.innerHeight/8 + j * window.innerHeight/15,
                     enemies[j] + '-Animation'
                 ).setOrigin(0.5, 0.5);
                 enemy.play(`${enemies[j]}-Animation`);
@@ -32,6 +32,7 @@ export class Game extends Scene
             }
         }
 
+        this.enemyGroup.scaleXY(window.innerWidth/800,window.innerHeight/800);
         //player
         this.player = this.physics.add.sprite(400, 500, 'Player');
 
