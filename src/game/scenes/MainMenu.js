@@ -62,6 +62,17 @@ export class MainMenu extends Scene {
             repeat: fullSub.length - 1
         });
 
+
+
+
+
+        this.badGuy1 = this.add.sprite((window.innerWidth/2-(window.innerWidth/12)),((window.innerHeight*4)/7),'A-Animation');
+        this.badGuy2 = this.add.sprite((window.innerWidth/2-(window.innerWidth/12)),((window.innerHeight*4)/7+(window.innerHeight/12)),"B-Animation");
+        this.badGuy3 = this.add.sprite((window.innerWidth/2-(window.innerWidth/12)),((window.innerHeight*4)/7+(window.innerHeight/6)),"C-Animation");
+        this.badGuy4 = this.add.image((window.innerWidth/2-(window.innerWidth/12)),((window.innerHeight*4)/7+(window.innerHeight/12)*3),"UFO");
+
+
+
         // Add space key input to start the game
         const spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         spaceKey.on('down', () => {
