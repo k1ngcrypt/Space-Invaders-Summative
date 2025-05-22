@@ -28,18 +28,22 @@ export class Game extends Scene
                     enemies[j] + '-Animation'
                 ).setOrigin(0.5, 0.5);
                 enemy.play(`${enemies[j]}-Animation`);
+                enemy.type = j;
             }
         }
+
+        //player
+        this.player = this.physics.add.sprite(400, 500, 'Player');
 
         this.playerBullets = this.physics.add.group();
 
         this.physics.add.collider(this.enemyGroup, this.playerBullets, onEnemyHit, null, this);
 
-        // Example collision callback
+        //collision callback
         function onEnemyHit(enemy, bullet) {
             enemy.destroy();
             bullet.destroy();
-            score++;
+            score += (7*enemy.type**5-115*enemy.type**4+715*enemy.type**3-2075*enemy.type**2+2788*enemy.type-1260)/6;
         }
 
         this.input.once('pointerdown', () => {
