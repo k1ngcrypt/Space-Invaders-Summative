@@ -31,6 +31,8 @@ export class Game extends Scene
             }
         }
 
+        this.playerBullets = this.physics.add.group();
+
         this.physics.add.collider(this.enemyGroup, this.playerBullets, onEnemyHit, null, this);
 
         // Example collision callback
