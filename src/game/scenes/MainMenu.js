@@ -17,7 +17,7 @@ export class MainMenu extends Scene {
                 color: '#FFFFFF',
                 align: 'center'
             }
-        ).setOrigin(0.5,0.5);
+        ).setOrigin(0.5, 0.5);
 
         // Title animation variables
         let currentTitle = '';
@@ -66,11 +66,14 @@ export class MainMenu extends Scene {
 
 
 
-        this.badGuy1 = this.add.sprite((window.innerWidth/2-(window.innerWidth/12)),((window.innerHeight*4)/7),'A-Animation');
-        this.badGuy2 = this.add.sprite((window.innerWidth/2-(window.innerWidth/12)),((window.innerHeight*4)/7+(window.innerHeight/12)),"B-Animation");
-        this.badGuy3 = this.add.sprite((window.innerWidth/2-(window.innerWidth/12)),((window.innerHeight*4)/7+(window.innerHeight/6)),"C-Animation");
-        this.badGuy4 = this.add.image((window.innerWidth/2-(window.innerWidth/12)),((window.innerHeight*4)/7+(window.innerHeight/12)*3),"UFO");
+        this.badGuy1 = this.add.sprite(window.innerWidth / 2 - window.innerWidth / 12, window.innerHeight * 4 / 7, 'A-Animation');
+        this.badGuy2 = this.add.sprite(window.innerWidth / 2 - window.innerWidth / 12, window.innerHeight * 4 / 7 + window.innerHeight / 12, "B-Animation");
+        this.badGuy3 = this.add.sprite(window.innerWidth / 2 - window.innerWidth / 12, window.innerHeight * 4 / 7 + window.innerHeight / 6, "C-Animation");
+        this.badGuy4 = this.add.image(window.innerWidth / 2 - window.innerWidth / 12, window.innerHeight * 4 / 7 + window.innerHeight / 12 * 3, "UFO");
 
+        this.badGuy1.play('A-Animation');
+        this.badGuy2.play('B-Animation');
+        this.badGuy3.play('C-Animation');
 
 
         // Add space key input to start the game
