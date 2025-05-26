@@ -63,7 +63,7 @@ export class MainMenu extends Scene {
         });
 
 
-
+        
 
 
         this.badGuy1 = this.add.sprite(window.innerWidth / 2 - window.innerWidth / 12, window.innerHeight * 4 / 7, 'A-Animation');
@@ -81,5 +81,8 @@ export class MainMenu extends Scene {
         spaceKey.on('down', () => {
             this.scene.start('Game');
         });
+
+       const minitext = this.add.text(window.innerHeight/2, window.innerWidth/2, '= 10 points', { fontFamily: 'font-family: "Workbench", sans-serif;' }).setOrigin(0.5, 0.5); 
+
     }
 }
