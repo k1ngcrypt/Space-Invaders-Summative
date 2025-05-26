@@ -47,9 +47,12 @@ export class Game extends Scene
             if (!this.cursors.left.isDown) this.player.setVelocityX(0);
         });
 
-
-
         this.playerBullets = this.physics.add.group();
+
+        this.input.keyboard.on('keydown-SPACE', () => {
+            const bullet = this.playerBullets.create(this.player.x, this.player.y, 'Projectile_Player');
+            bullet.setVelocityY(-500);
+        });
 
         this.physics.add.collider(this.enemyGroup, this.playerBullets, onEnemyHit, null, this);
 
