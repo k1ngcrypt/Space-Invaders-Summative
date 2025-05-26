@@ -10,11 +10,6 @@ export class Game extends Scene
     create ()
     {
         let score = 0;
-        const upKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-        const downKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
-        const rightKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-        const leftKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-        const spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         const enemies = ['A', 'B','B','C', 'C'];
 
         // Create a physics group for enemies
@@ -34,9 +29,30 @@ export class Game extends Scene
 
         this.enemyGroup.scaleXY(window.innerWidth/800,window.innerHeight/800);
         //player
-        this.player = this.physics.add.sprite(400, 500, 'Player');
+        this.player = this.physics.add.sprite(window.innerWidth/2, window.innerHeight/1.5, 'Player');
+        this.player.setScale(window.innerWidth/800,window.innerHeight/800);
+        this.player.setCollideWorldBounds(true);
+        this.cursors = this.input.keyboard.createCursorKeys();
+
+        this.input.keyboard.on('keydown-LEFT', () => {
+            this.player.setVelocityX(-300);
+        });
+        this.input.keyboard.on('keyup-LEFT', () => {
+            if (!this.cursors.right.isDown) this.player.setVelocityX(0);
+        });
+        this.input.keyboard.on('keydown-RIGHT', () => {
+            this.player.setVelocityX(300);
+        });
+        this.input.keyboard.on('keyup-RIGHT', () => {
+            if (!this.cursors.left.isDown) this.player.setVelocityX(0);
+        });
 
         this.playerBullets = this.physics.add.group();
+
+        this.input.keyboard.on('keydown-SPACE', () => {
+            const bullet = this.playerBullets.create(this.player.x, this.player.y, 'Projectile_Player');
+            bullet.setVelocityY(-500);
+        });
 
         this.physics.add.collider(this.enemyGroup, this.playerBullets, onEnemyHit, null, this);
 
