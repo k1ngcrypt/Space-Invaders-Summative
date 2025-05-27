@@ -48,6 +48,7 @@ export class Game extends Scene {
 
         this.input.keyboard.on('keydown-SPACE', () => {
             const bullet = this.playerBullets.create(this.player.x, this.player.y, 'Projectile_Player');
+            bullet.setScale(window.innerWidth / 800, window.innerHeight / 800);
             bullet.setVelocityY(-500);
         });
 
@@ -57,7 +58,7 @@ export class Game extends Scene {
         function onEnemyHit(enemy, bullet) {
             enemy.destroy();
             bullet.destroy();
-            score += (
+            score += Math.round(
                 (
                     (1/6) * (enemy.type ** 5)
                     - (15/2) * (enemy.type ** 3)
