@@ -82,7 +82,29 @@ export class MainMenu extends Scene {
             this.scene.start('Game');
         });
 
-       const minitext = this.add.text(window.innerHeight/2, window.innerWidth/2, '= 10 points', { fontFamily: 'font-family: "Workbench", sans-serif;' }).setOrigin(0.5, 0.5); 
+        const minitext = this.add.text(
+            window.innerWidth / 2 - 50,
+            window.innerHeight * 4 / 7,
+            '= 30 points',
+            {
+                fontFamily: 'Workbench,sans-serif',
+                fontSize: '28px',
+                color: '#ffffff' 
+            }
+        ).setOrigin(0.5, 0.5);
+
+
+
+        const minitext1 = this.add.text(
+            window.innerWidth / 2 - 50,
+            window.innerHeight * 2/3 - 10,
+            '= 20 points',
+            {
+                fontFamily: 'Workbench,sans-serif',
+                fontSize: '28px',
+                color: '#ffffff' 
+            }
+        ).setOrigin(0.5, 0.5);
 
     }
 }
