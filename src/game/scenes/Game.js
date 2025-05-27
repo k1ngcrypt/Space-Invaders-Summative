@@ -3,6 +3,8 @@ import { Scene } from 'phaser';
 export class Game extends Scene {
     constructor() {
         super('Game');
+        this.enemyDirection = 1; // 1 for right, -1 for left
+        this.enemySpeed = 50;    // pixels per second
     }
 
     create() {
@@ -60,10 +62,10 @@ export class Game extends Scene {
             bullet.destroy();
             score += Math.round(
                 (
-                    (1/6) * (enemy.type ** 5)
-                    - (15/2) * (enemy.type ** 3)
+                    (1 / 6) * (enemy.type ** 5)
+                    - (15 / 2) * (enemy.type ** 3)
                     + 25 * (enemy.type ** 2)
-                    - (83/3) * enemy.type
+                    - (83 / 3) * enemy.type
                     + 30
                 )
             );
@@ -88,5 +90,40 @@ export class Game extends Scene {
             },
             loop: true
         });
+
+        this.enemyProjectiles = this.physics.add.group();
+        this.physics.add.collider(this.enemyProjectiles, this.player, (proj, player) => {
+            proj.destroy();
+            player.destroy();
+            this.scene.start('GameOver');
+        });
+    }
+
+    update(time, delta) {
+        const group = this.enemyGroup;
+        const speed = this.enemySpeed * (delta / 1000) * this.enemyDirection;
+
+        group.children.iterate(enemy => {
+            enemy.x += speed;
+            if (Math.random() < 0.01) {
+                const projectile = this.enemyProjectiles.create(
+                    enemy.x,
+                    enemy.y,
+                    `Projectile${enemy.type + 1}_${Math.ceil(Math.random() * 4)}`
+                );
+                projectile.setScale(window.innerWidth / 800, window.innerHeight / 800);
+                projectile.setVelocityY(200);
+            }
+        });
+
+        let hitEdge = false;
+        group.children.iterate(enemy => {
+            if (enemy.x <= 0 + enemy.displayWidth / 2 || enemy.x >= this.sys.game.config.width - enemy.displayWidth / 2) {
+                hitEdge = true;
+            }
+        });
+        if (hitEdge) {
+            this.enemyDirection *= -1;
+        }
     }
 }
