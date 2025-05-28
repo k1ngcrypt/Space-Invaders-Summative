@@ -85,7 +85,10 @@ export class Game extends Scene {
         };
         this.events.on('updateScore', updateScoreHandler);
 
-        this.livesText = this.add.text(window.innerWidth - 10, window.innerHeight /15 , 'Lives: 3', { font: '32px Workbench', fill: '#000000' });
+        // Displays life
+
+        const Livesdisplay = this.add.text(16, 50, 'Lives: 3', { font: '32px ', fill: '#fff' });
+
 
 
         // Remove event listener when scene shuts down
