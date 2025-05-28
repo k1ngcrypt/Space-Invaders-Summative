@@ -8,6 +8,7 @@ export class Game extends Scene {
     }
 
     create() {
+        let lives = 3;
         let score = 0;
         const enemies = ['A', 'B', 'B', 'C', 'C'];
 
@@ -102,8 +103,13 @@ export class Game extends Scene {
         this.enemyProjectiles = this.physics.add.group();
         this.physics.add.collider(this.enemyProjectiles, this.player, (proj, player) => {
             proj.destroy();
+            if (lives == 0) {
             player.destroy();
             this.scene.start('GameOver');
+        } else {
+            lives--;
+        } 
+
         });
 
         // Create shelters
@@ -161,6 +167,24 @@ export class Game extends Scene {
         });
         if (hitEdge) {
             this.enemyDirection *= -1;
+
+
+            class SceneB extends Phaser.Scene {
+                constructor () {
+                    super({ key: 'UIScene', active: true });
+                    this.scoreText;
+                    this.livesText;
+                }
+            
+                create () {
+                    // Our Text object to display the Score
+                    this.scoreText = this.add.text(10, 10, 'Score: 0', { font: '32px Workbench', fill: '#000000' });
+                    this.livesText = this.add.text(10, 48, 'Lives: 3', { font: '32px Workbench', fill: '#000000' });
+            
+                    // Check the Registry and hit our callback every time the 'score' value is updated
+                    this.registry.events.on('changedata', this.updateData, this);
+                }
+            }
         }
     }
 }
