@@ -85,6 +85,9 @@ export class Game extends Scene {
         };
         this.events.on('updateScore', updateScoreHandler);
 
+        this.livesText = this.add.text(window.innerWidth - 10, window.innerHeight /15 , 'Lives: 3', { font: '32px Workbench', fill: '#000000' });
+
+
         // Remove event listener when scene shuts down
         this.events.once('shutdown', () => {
             this.events.off('updateScore', updateScoreHandler);
@@ -176,14 +179,8 @@ export class Game extends Scene {
                     this.livesText;
                 }
             
-                create () {
-                    // Our Text object to display the Score
-                    this.scoreText = this.add.text(10, 10, 'Score: 0', { font: '32px Workbench', fill: '#000000' });
-                    this.livesText = this.add.text(10, 48, 'Lives: 3', { font: '32px Workbench', fill: '#000000' });
             
-                    // Check the Registry and hit our callback every time the 'score' value is updated
-                    this.registry.events.on('changedata', this.updateData, this);
-                }
+            
             }
         }
     }
