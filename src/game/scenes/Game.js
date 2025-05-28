@@ -106,7 +106,7 @@ export class Game extends Scene {
         this.enemyProjectiles = this.physics.add.group();
         this.physics.add.collider(this.enemyProjectiles, this.player, (proj, player) => {
             proj.destroy();
-            if (lives == 0) {
+            if (lives < 1) {
             player.destroy();
             this.scene.start('GameOver');
         } else {
