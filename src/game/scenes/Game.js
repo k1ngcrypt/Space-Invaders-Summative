@@ -105,6 +105,34 @@ export class Game extends Scene {
             player.destroy();
             this.scene.start('GameOver');
         });
+
+        // Create shelters
+        this.shelterBlocks = this.physics.add.staticGroup();
+        const shelterPositions = [200, 400, 600]; //X positions
+        shelterPositions.forEach(x => {
+            for (let i = 0; i < 8; i++) { // width
+                for (let j = 0; j < 4; j++) { // height
+                    const block = this.shelterBlocks.create(
+                        x + i * 8, // adjust spacing as needed
+                        window.innerHeight / 1.2 + j * 8,
+                        'ShelterBlock'
+                    );
+                    block.setOrigin(0.5, 0.5);
+                }
+            }
+        });
+
+        // Collide player bullets with shelter blocks
+        this.physics.add.collider(this.playerBullets, this.shelterBlocks, (bullet, block) => {
+            bullet.destroy();
+            block.destroy(); // Remove block to create a gap
+        });
+
+        // Collide enemy bullets with shelter blocks
+        this.physics.add.collider(this.enemyProjectiles, this.shelterBlocks, (bullet, block) => {
+            bullet.destroy();
+            block.destroy();
+        });
     }
 
     update(time, delta) {
