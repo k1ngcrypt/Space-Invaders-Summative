@@ -87,7 +87,7 @@ export class Game extends Scene {
 
         // Displays life
 
-        const Livesdisplay = this.add.text(16, 50, 'Lives: 3', { font: '32px ', fill: '#fff' });
+        const Livesdisplay = this.add.text(16, 50, 'Lives: ' + String(this.lives), { font: '32px ', fill: '#fff' });
 
 
 
