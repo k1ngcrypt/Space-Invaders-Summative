@@ -23,6 +23,7 @@ export class Game extends Scene {
                 ).setOrigin(0.5, 0.5);
                 enemy.play(`${enemies[j]}-Animation`);
                 enemy.type = j;
+                enemy.name = enemies[j];
             }
         }
 
@@ -78,9 +79,16 @@ export class Game extends Scene {
             { fontSize: '32px', fill: '#fff' }
         );
 
-        this.events.on('updateScore', (newScore) => {
+        const updateScoreHandler = (newScore) => {
             scoreText.setText('Score: ' + newScore);
+        };
+        this.events.on('updateScore', updateScoreHandler);
+
+        // Remove event listener when scene shuts down
+        this.events.once('shutdown', () => {
+            this.events.off('updateScore', updateScoreHandler);
         });
+
         this.time.addEvent({
             delay: 1000,
             callback: () => {
@@ -105,11 +113,11 @@ export class Game extends Scene {
 
         group.children.iterate(enemy => {
             enemy.x += speed;
-            if (Math.random() < 0.01) {
+            if (Math.random() < 0.0015) {
                 const projectile = this.enemyProjectiles.create(
                     enemy.x,
                     enemy.y,
-                    `Projectile${enemy.type + 1}_${Math.ceil(Math.random() * 4)}`
+                    `Projectile${enemy.name}-Animation`
                 );
                 projectile.setScale(window.innerWidth / 800, window.innerHeight / 800);
                 projectile.setVelocityY(200);

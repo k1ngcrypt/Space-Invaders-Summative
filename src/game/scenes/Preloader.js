@@ -69,7 +69,7 @@ export class Preloader extends Scene
         this.load.image('missile_3', 'missile_3.png');
         this.load.image('missile_4', 'missile_4.png');
         this.load.image('Projectile_Player', 'Projectile_Player.png');
-        this.load.image('ProjectileA_2', 'ProjectileA__2.png');
+        this.load.image('ProjectileA_2', 'ProjectileA_2.png');
         this.load.image('ProjectileA_1', 'ProjectileA_1.png');
         this.load.image('ProjectileA_3', 'ProjectileA_3.png');
         this.load.image('ProjectileA_4', 'ProjectileA_4.png');
