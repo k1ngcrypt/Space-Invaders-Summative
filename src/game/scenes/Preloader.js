@@ -120,7 +120,7 @@ export class Preloader extends Scene
             { key: 'ProjectileA_3' },
             { key: 'ProjectileA_4' }
             ],
-            frameRate: 20,
+            frameRate: 5,
             repeat: -1
         });
 
@@ -132,7 +132,7 @@ export class Preloader extends Scene
             { key: 'ProjectileB_3' },
             { key: 'ProjectileB_4' }
             ],
-            frameRate: 20,
+            frameRate: 5,
             repeat: -1
         });
 
@@ -144,7 +144,7 @@ export class Preloader extends Scene
             { key: 'ProjectileC_3' },
             { key: 'ProjectileC_4' }
             ],
-            frameRate: 20,
+            frameRate: 5,
             repeat: -1
         });
 

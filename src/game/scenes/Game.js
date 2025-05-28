@@ -121,6 +121,7 @@ export class Game extends Scene {
                 );
                 projectile.setScale(window.innerWidth / 800, window.innerHeight / 800);
                 projectile.setVelocityY(200);
+                projectile.play(`Projectile${enemy.name}-Animation`);
             }
         });
 
