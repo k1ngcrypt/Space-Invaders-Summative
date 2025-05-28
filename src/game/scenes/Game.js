@@ -117,9 +117,9 @@ export class Game extends Scene {
                 const projectile = this.enemyProjectiles.create(
                     enemy.x,
                     enemy.y,
-                    `Projectile${enemy.name}-Animation`
+                    `Projectile${enemy.name}_1`
                 );
-                projectile.setScale(window.innerWidth / 800, window.innerHeight / 800);
+                projectile.setScale(window.innerWidth / 400, window.innerHeight / 400);
                 projectile.setVelocityY(200);
                 projectile.play(`Projectile${enemy.name}-Animation`);
             }
