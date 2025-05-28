@@ -5,10 +5,10 @@ export class Game extends Scene {
         super('Game');
         this.enemyDirection = 1; // 1 for right, -1 for left
         this.enemySpeed = 50;    // pixels per second
+        this.lives = 3;
     }
 
     create() {
-        let lives = 3;
         let score = 0;
         const enemies = ['A', 'B', 'B', 'C', 'C'];
 
@@ -107,15 +107,13 @@ export class Game extends Scene {
         });
 
         this.enemyProjectiles = this.physics.add.group();
-        this.physics.add.collider(this.enemyProjectiles, this.player, (proj, player) => {
+        this.physics.add.collider(this.enemyProjectiles, this.player, (player, proj) => {
             proj.destroy();
-            if (lives < 1) {
-            player.destroy();
-            this.scene.start('GameOver');
-        } else {
-            lives--;
-        } 
-
+            this.lives--;
+            if (this.lives < 1) {
+                player.destroy();
+                this.scene.start('GameOver');
+            }
         });
 
         // Create shelters
@@ -173,18 +171,6 @@ export class Game extends Scene {
         });
         if (hitEdge) {
             this.enemyDirection *= -1;
-
-
-            class SceneB extends Phaser.Scene {
-                constructor () {
-                    super({ key: 'UIScene', active: true });
-                    this.scoreText;
-                    this.livesText;
-                }
-            
-            
-            
-            }
         }
     }
 }
