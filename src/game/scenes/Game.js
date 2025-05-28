@@ -8,6 +8,7 @@ export class Game extends Scene {
     }
 
     create() {
+        let lives = 3;
         let score = 0;
         const enemies = ['A', 'B', 'B', 'C', 'C'];
 
@@ -102,7 +103,11 @@ export class Game extends Scene {
         this.enemyProjectiles = this.physics.add.group();
         this.physics.add.collider(this.enemyProjectiles, this.player, (proj, player) => {
             proj.destroy();
+            if (lives == 0) {
             player.destroy();
+        } else {
+            lives--;
+        } 
             this.scene.start('GameOver');
         });
     }
