@@ -105,10 +105,11 @@ export class Game extends Scene {
             proj.destroy();
             if (lives == 0) {
             player.destroy();
+            this.scene.start('GameOver');
         } else {
             lives--;
         } 
-            this.scene.start('GameOver');
+
         });
     }
 
