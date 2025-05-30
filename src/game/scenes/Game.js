@@ -105,7 +105,7 @@ export class Game extends Scene {
             delay: 1000,
             callback: () => {
                 if (this.enemyGroup.getChildren().length === 0) {
-                    this.scene.start('Win', { score });
+                    this.scene.start('Win', { "score": score });
                 }
             },
             loop: true
