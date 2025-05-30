@@ -118,7 +118,7 @@ export class Game extends Scene {
             updateLivesDisplay(); // Update lives text when hit
             if (this.lives < 1) {
                 player.destroy();
-                this.scene.start('GameOver');
+                this.scene.start('GameOver', { "score": score });
             }
         });
 
