@@ -91,7 +91,10 @@ export class Game extends Scene {
 
         const Livesdisplay = this.add.text(16, 50, 'Lives: ' + String(this.lives), { font: '32px ', fill: '#fff' });
 
-
+        // Function to update lives display
+        const updateLivesDisplay = () => {
+            Livesdisplay.setText('Lives: ' + String(this.lives));
+        };
 
         // Remove event listener when scene shuts down
         this.events.once('shutdown', () => {
@@ -112,9 +115,10 @@ export class Game extends Scene {
         this.physics.add.collider(this.enemyProjectiles, this.player, (player, proj) => {
             proj.destroy();
             this.lives--;
+            updateLivesDisplay(); // Update lives text when hit
             if (this.lives < 1) {
                 player.destroy();
-                this.scene.start('GameOver');
+                this.scene.start('GameOver', { "score": score });
             }
         });
 
