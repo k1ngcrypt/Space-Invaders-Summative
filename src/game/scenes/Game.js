@@ -105,7 +105,7 @@ export class Game extends Scene {
             delay: 1000,
             callback: () => {
                 if (this.enemyGroup.getChildren().length === 0) {
-                    this.scene.start('GameOver', { score });
+                    this.scene.start('Win', { score });
                 }
             },
             loop: true
@@ -118,7 +118,7 @@ export class Game extends Scene {
             updateLivesDisplay(); // Update lives text when hit
             if (this.lives < 1) {
                 player.destroy();
-                this.scene.start('GameOver', { "score": score });
+                this.scene.start('Lose', { "score": score });
             }
         });
 
