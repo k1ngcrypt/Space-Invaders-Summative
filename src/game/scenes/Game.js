@@ -10,6 +10,7 @@ export class Game extends Scene {
 
     create() {
         let score = 0;
+        this.lives = 3;
         const enemies = ['A', 'B', 'B', 'C', 'C'];
 
         // Create a physics group for enemies
@@ -34,6 +35,7 @@ export class Game extends Scene {
         this.player.setScale(window.innerWidth / 800, window.innerHeight / 800);
         this.player.setCollideWorldBounds(true);
         this.cursors = this.input.keyboard.createCursorKeys();
+        this.player.setImmovable(true);
 
         this.input.keyboard.on('keydown-LEFT', () => {
             this.player.setVelocityX(-300);
