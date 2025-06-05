@@ -69,7 +69,7 @@ export class MainMenu extends Scene {
         this.badGuy1 = this.add.sprite(window.innerWidth / 2 - window.innerWidth / 12, window.innerHeight * 4 / 7, 'A-Animation');
         this.badGuy2 = this.add.sprite(window.innerWidth / 2 - window.innerWidth / 12, window.innerHeight * 4 / 7 + window.innerHeight / 12, "B-Animation");
         this.badGuy3 = this.add.sprite(window.innerWidth / 2 - window.innerWidth / 12, window.innerHeight * 4 / 7 + window.innerHeight / 6, "C-Animation");
-        this.badGuy4 = this.add.image(window.innerWidth / 2 - window.innerWidth / 12, window.innerHeight * 4 / 7 + window.innerHeight / 12 * 3, "UFO");
+        this.badGuy4 = this.add.image(window.innerWidth / 2 - window.innerWidth / 12, window.innerHeight * 4 / 7 + window.innerHeight / 4, "UFO");
 
         this.badGuy1.play('A-Animation');
         this.badGuy2.play('B-Animation');
@@ -83,7 +83,7 @@ export class MainMenu extends Scene {
         });
 
         const minitext = this.add.text(
-            window.innerWidth / 2 + window.innerWidth /12,
+            window.innerWidth / 2,
             window.innerHeight * 4 / 7,
             '= 30 points',
             {
@@ -96,8 +96,8 @@ export class MainMenu extends Scene {
 
 
         const minitext1 = this.add.text(
-            window.innerWidth / 2 + window.innerWidth /12,
-            window.innerHeight * 2/3 - 10,
+            window.innerWidth / 2,
+            window.innerHeight * 4 / 7 + window.innerHeight / 12,
             '= 20 points',
             {
                 fontFamily: 'Workbench,sans-serif',
@@ -108,8 +108,8 @@ export class MainMenu extends Scene {
 
         
         const minitext4 = this.add.text(
-            window.innerWidth / 2 + window.innerWidth /12,
-            window.innerHeight * 2/3 + 70,
+            window.innerWidth / 2,
+            window.innerHeight * 4 / 7 + window.innerHeight / 6,
             '= 10 points',
             {
                 fontFamily: 'Workbench,sans-serif',
@@ -121,8 +121,8 @@ export class MainMenu extends Scene {
 
 
         const minitext3 = this.add.text(
-            window.innerWidth / 2 + window.innerWidth /12,
-            window.innerHeight * 2/3 + 150,
+            window.innerWidth /2,
+            window.innerHeight * 4 / 7 + window.innerHeight / 4,
             '= ? points',
             {
                 fontFamily: 'Workbench,sans-serif',
