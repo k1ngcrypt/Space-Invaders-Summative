@@ -1,5 +1,5 @@
 import { Scene } from 'phaser';
-
+let score=0;
 export class Preloader extends Scene
 {
     constructor ()
