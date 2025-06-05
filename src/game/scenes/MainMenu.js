@@ -83,7 +83,7 @@ export class MainMenu extends Scene {
         });
 
         const minitext = this.add.text(
-            window.innerWidth / 2 - 50,
+            window.innerWidth / 2 + window.innerWidth /12,
             window.innerHeight * 4 / 7,
             '= 30 points',
             {
@@ -96,7 +96,7 @@ export class MainMenu extends Scene {
 
 
         const minitext1 = this.add.text(
-            window.innerWidth / 2 - 50,
+            window.innerWidth / 2 + window.innerWidth /12,
             window.innerHeight * 2/3 - 10,
             '= 20 points',
             {
@@ -108,7 +108,7 @@ export class MainMenu extends Scene {
 
         
         const minitext4 = this.add.text(
-            window.innerWidth / 2 - 50,
+            window.innerWidth / 2 + window.innerWidth /12,
             window.innerHeight * 2/3 + 70,
             '= 10 points',
             {
@@ -121,7 +121,7 @@ export class MainMenu extends Scene {
 
 
         const minitext3 = this.add.text(
-            window.innerWidth / 2 - 50,
+            window.innerWidth / 2 + window.innerWidth /12,
             window.innerHeight * 2/3 + 150,
             '= ? points',
             {
