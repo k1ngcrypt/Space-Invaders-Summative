@@ -1,12 +1,13 @@
 import { Scene } from 'phaser';
 
+// Main menu scene for the game
 export class MainMenu extends Scene {
     constructor() {
         super('MainMenu');
     }
 
     create() {
-        // Add title text
+        // Animated title text
         const titleText = this.add.text(
             window.innerWidth / 2,
             window.innerHeight / 5,
@@ -19,7 +20,7 @@ export class MainMenu extends Scene {
             }
         ).setOrigin(0.5, 0.5);
 
-        // Title animation variables
+        // Title animation logic
         let currentTitle = '';
         const fullTitle = 'PLAY\nSPACE INVADERS';
         let iTitle = 0;
@@ -35,6 +36,7 @@ export class MainMenu extends Scene {
             repeat: fullTitle.length - 1,
         });
 
+        // Animated subtitle text
         const subTitleText = this.add.text(
             window.innerWidth / 2,
             (window.innerHeight / 4) + 20,
@@ -62,10 +64,7 @@ export class MainMenu extends Scene {
             repeat: fullSub.length - 1
         });
 
-
-        
-
-
+        // Enemy sprites and animations
         this.badGuy1 = this.add.sprite(window.innerWidth / 2 - window.innerWidth / 12, window.innerHeight * 4 / 7, 'A-Animation');
         this.badGuy2 = this.add.sprite(window.innerWidth / 2 - window.innerWidth / 12, window.innerHeight * 4 / 7 + window.innerHeight / 12, "B-Animation");
         this.badGuy3 = this.add.sprite(window.innerWidth / 2 - window.innerWidth / 12, window.innerHeight * 4 / 7 + window.innerHeight / 6, "C-Animation");
@@ -75,13 +74,13 @@ export class MainMenu extends Scene {
         this.badGuy2.play('B-Animation');
         this.badGuy3.play('C-Animation');
 
-
-        // Add space key input to start the game
+        // Start game on space key press
         const spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         spaceKey.on('down', () => {
             this.scene.start('Game');
         });
 
+        // Points text for each enemy type
         const minitext = this.add.text(
             window.innerWidth / 2,
             window.innerHeight * 4 / 7,
@@ -89,11 +88,9 @@ export class MainMenu extends Scene {
             {
                 fontFamily: 'Workbench,sans-serif',
                 fontSize: '28px',
-                color: '#ffffff' 
+                color: '#ffffff'
             }
         ).setOrigin(0.5, 0.5);
-
-
 
         const minitext1 = this.add.text(
             window.innerWidth / 2,
@@ -102,11 +99,10 @@ export class MainMenu extends Scene {
             {
                 fontFamily: 'Workbench,sans-serif',
                 fontSize: '28px',
-                color: '#ffffff' 
+                color: '#ffffff'
             }
         ).setOrigin(0.5, 0.5);
 
-        
         const minitext4 = this.add.text(
             window.innerWidth / 2,
             window.innerHeight * 4 / 7 + window.innerHeight / 6,
@@ -114,20 +110,18 @@ export class MainMenu extends Scene {
             {
                 fontFamily: 'Workbench,sans-serif',
                 fontSize: '28px',
-                color: '#ffffff' 
+                color: '#ffffff'
             }
         ).setOrigin(0.5, 0.5);
 
-
-
         const minitext3 = this.add.text(
-            window.innerWidth /2,
+            window.innerWidth / 2,
             window.innerHeight * 4 / 7 + window.innerHeight / 4,
             '= ? points',
             {
                 fontFamily: 'Workbench,sans-serif',
                 fontSize: '28px',
-                color: '#ffffff' 
+                color: '#ffffff'
             }
         ).setOrigin(0.5, 0.5);
 

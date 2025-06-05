@@ -1,11 +1,12 @@
 import { Scene } from 'phaser';
 
+// Main game scene
 export class Game extends Scene {
     constructor() {
         super('Game');
-        this.enemyDirection = 1; // 1 for right, -1 for left
-        this.enemySpeed = 50;    // pixels per second
-        this.lives = 3;
+        this.enemyDirection = 1; // Enemy movement direction
+        this.enemySpeed = 50;    // Enemy speed
+        this.lives = 3;          // Player lives
     }
 
     create() {
@@ -13,9 +14,10 @@ export class Game extends Scene {
         this.lives = 3;
         const enemies = ['A', 'B', 'B', 'C', 'C'];
 
-        // Create a physics group for enemies
+        // Create enemies group
         this.enemyGroup = this.physics.add.group();
 
+        // Spawn enemies in grid
         for (let i = 0; i < 12; i++) {
             for (let j = 0; j < 5; j++) {
                 const enemy = this.enemyGroup.create(
@@ -30,13 +32,15 @@ export class Game extends Scene {
         }
 
         this.enemyGroup.scaleXY(window.innerWidth / 800, window.innerHeight / 800);
-        //player
+
+        // Player setup
         this.player = this.physics.add.sprite(window.innerWidth / 2, window.innerHeight / 1.2, 'Player');
         this.player.setScale(window.innerWidth / 800, window.innerHeight / 800);
         this.player.setCollideWorldBounds(true);
         this.cursors = this.input.keyboard.createCursorKeys();
         this.player.setImmovable(true);
 
+        // Player movement controls
         this.input.keyboard.on('keydown-LEFT', () => {
             this.player.setVelocityX(-300);
         });
@@ -50,6 +54,7 @@ export class Game extends Scene {
             if (!this.cursors.left.isDown) this.player.setVelocityX(0);
         });
 
+        // Player bullets group
         this.playerBullets = this.physics.add.group();
         this.bulletDb = true;
         this.input.keyboard.on('keydown-SPACE', () => {
@@ -61,9 +66,10 @@ export class Game extends Scene {
             }
         });
 
+        // Enemy hit by player bullet
         this.physics.add.collider(this.enemyGroup, this.playerBullets, onEnemyHit, null, this);
 
-        //collision callback
+        // Score calculation on enemy hit
         function onEnemyHit(enemy, bullet) {
             enemy.destroy();
             bullet.destroy();
@@ -80,31 +86,33 @@ export class Game extends Scene {
             this.events.emit('updateScore', this.score);
         }
 
+        // Score display
         const scoreText = this.add.text(
             16, 16,
             'Score: 0',
             { fontSize: '32px', fill: '#fff' }
         );
 
+        // Update score text
         const updateScoreHandler = (newScore) => {
             scoreText.setText('Score: ' + newScore);
         };
         this.events.on('updateScore', updateScoreHandler);
 
-        // Displays life
-
+        // Lives display
         const Livesdisplay = this.add.text(16, 50, 'Lives: ' + String(this.lives), { font: '32px ', fill: '#fff' });
 
-        // Function to update lives display
+        // Update lives text
         const updateLivesDisplay = () => {
             Livesdisplay.setText('Lives: ' + String(this.lives));
         };
 
-        // Remove event listener when scene shuts down
+        // Remove event listener on shutdown
         this.events.once('shutdown', () => {
             this.events.off('updateScore', updateScoreHandler);
         });
 
+        // Win condition check
         this.time.addEvent({
             delay: 1000,
             callback: () => {
@@ -115,11 +123,14 @@ export class Game extends Scene {
             loop: true
         });
 
+        // Enemy projectiles group
         this.enemyProjectiles = this.physics.add.group();
+
+        // Player hit by enemy projectile
         this.physics.add.collider(this.enemyProjectiles, this.player, (player, proj) => {
             proj.destroy();
             this.lives--;
-            updateLivesDisplay(); // Update lives text when hit
+            updateLivesDisplay();
             if (this.lives < 1) {
                 player.destroy();
                 this.scene.start('Lose');
@@ -129,36 +140,36 @@ export class Game extends Scene {
 
         // Create shelters
         this.shelterBlocks = this.physics.add.staticGroup();
-        // Calculate 4 evenly spaced shelter positions
         const numShelters = 4;
-        const shelterWidth = 5 * 30; // 5 blocks wide, 30px each
+        const shelterWidth = 5 * 30;
         const spacing = (window.innerWidth - numShelters * shelterWidth) / (numShelters + 1);
         const shelterPositions = [];
         for (let i = 0; i < numShelters; i++) {
             shelterPositions.push(spacing + i * (shelterWidth + spacing));
         }
 
+        // Spawn shelter blocks
         shelterPositions.forEach(x => {
-            for (let i = 0; i < 5; i++) { // width
-            for (let j = 0; j < 3; j++) { // height
-                const block = this.shelterBlocks.create(
-                x + i * 30,
-                window.innerHeight / 1.5 + j * 30,
-                'ShelterBlock'
-                );
-                block.setOrigin(0.5, 0.5);
-            }
+            for (let i = 0; i < 5; i++) {
+                for (let j = 0; j < 3; j++) {
+                    const block = this.shelterBlocks.create(
+                        x + i * 30,
+                        window.innerHeight / 1.5 + j * 30,
+                        'ShelterBlock'
+                    );
+                    block.setOrigin(0.5, 0.5);
+                }
             }
         });
 
-        // Collide player bullets with shelter blocks
+        // Player bullets destroy shelter blocks
         this.physics.add.collider(this.playerBullets, this.shelterBlocks, (bullet, block) => {
             bullet.destroy();
-            block.destroy(); // Remove block to create a gap
+            block.destroy();
             this.bulletDb = true;
         });
 
-        // Collide enemy bullets with shelter blocks
+        // Enemy bullets destroy shelter blocks
         this.physics.add.collider(this.enemyProjectiles, this.shelterBlocks, (bullet, block) => {
             bullet.destroy();
             block.destroy();
@@ -169,6 +180,7 @@ export class Game extends Scene {
         const group = this.enemyGroup;
         const speed = this.enemySpeed * (delta / 1000) * this.enemyDirection;
 
+        // Move enemies and randomly shoot
         group.children.iterate(enemy => {
             enemy.x += speed;
             if (Math.random() < 0.0015) {
@@ -183,6 +195,7 @@ export class Game extends Scene {
             }
         });
 
+        // Change direction if any enemy hits edge
         let hitEdge = false;
         group.children.iterate(enemy => {
             if (enemy.x <= 0 + enemy.displayWidth / 2 || enemy.x >= this.sys.game.config.width - enemy.displayWidth / 2) {
@@ -193,7 +206,7 @@ export class Game extends Scene {
             this.enemyDirection *= -1;
         }
 
-        // Destroy player bullets that go off screen
+        // Destroy player bullets off screen
         this.playerBullets.getChildren().forEach(bullet => {
             if (bullet.y < 0) {
                 bullet.destroy();
@@ -201,7 +214,7 @@ export class Game extends Scene {
             }
         });
 
-        // Destroy enemy projectiles that go off screen
+        // Destroy enemy projectiles off screen
         this.enemyProjectiles.getChildren().forEach(bullet => {
             if (bullet.y > this.sys.game.config.height) {
                 bullet.destroy();

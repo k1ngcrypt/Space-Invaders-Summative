@@ -1,14 +1,13 @@
 import { Scene } from 'phaser';
 
-export class Preloader extends Scene
-{
-    constructor ()
-    {
+// Preloader scene: loads assets and sets up animations
+export class Preloader extends Scene {
+    constructor() {
         super('Preloader');
     }
 
     preload() {
-        // Center coordinates
+        // Center coordinates for progress bar
         const centerX = this.cameras.main.width / 2;
         const centerY = this.cameras.main.height / 2;
 
@@ -18,14 +17,14 @@ export class Preloader extends Scene
         const innerBarWidth = 464;
         const innerBarHeight = 28;
 
-        // Outline
+        // Draw progress bar outline
         this.add.rectangle(centerX, centerY, barWidth, barHeight)
             .setStrokeStyle(2, 0xffffff);
 
-        // Progress bar graphics
+        // Progress bar fill
         const progressBar = this.add.graphics();
 
-        // Listen to progress event
+        // Update progress bar on load progress
         this.load.on('progress', (progress) => {
             progressBar.clear();
             progressBar.fillStyle(0xffffff, 1);
@@ -37,32 +36,27 @@ export class Preloader extends Scene
             );
         });
 
-        // Optional: clear bar when complete
+        // Remove progress bar when loading is complete
         this.load.on('complete', () => {
             progressBar.destroy();
         });
 
-        //  Load the assets for the game - Replace with your own assets
+        // Load invader sprites
         this.load.setPath('assets/Sprites/Invaders');
-        // anims
         this.load.image('A1', 'A1.png');
         this.load.image('A2', 'A2.png');
         this.load.image('B1', 'B1.png');
         this.load.image('B2', 'B2.png');
         this.load.image('C1', 'C1.png');
         this.load.image('C2', 'C2.png');
-
-        // Remaining images
         this.load.image('EnemyExplosion', 'EnemyExplosion.png');
         this.load.image('Player', 'Player.png');
         this.load.image('PlayerExplosion', 'PlayerExplosion.png');
         this.load.image('ShieldFull', 'ShieldFull.png');
         this.load.image('UFO', 'UFO.png');
 
-        // Load projectile images
+        // Load projectile sprites
         this.load.setPath('assets/Sprites/Projectiles');
-
-        // Main projectile images
         this.load.image('missile_1', 'missile_1.png');
         this.load.image('missile_2', 'missile_2.png');
         this.load.image('missile_3', 'missile_3.png');
@@ -83,7 +77,7 @@ export class Preloader extends Scene
     }
 
     create() {
-        //global anims
+        // Invader animations
         this.anims.create({
             key: 'A-Animation',
             frames: [{ key: 'A1' }, { key: 'A2' }],
@@ -103,6 +97,7 @@ export class Preloader extends Scene
             repeat: -1
         });
 
+        // Missile animation
         this.anims.create({
             key: 'Missile-Animation',
             frames: [{ key: 'missile_1' }, { key: 'missile_2' }, { key: 'missile_3' }, { key: 'missile_4' }],
@@ -110,6 +105,7 @@ export class Preloader extends Scene
             repeat: -1
         });
 
+        // Projectile animations
         this.anims.create({
             key: 'ProjectileA-Animation',
             frames: [
@@ -146,13 +142,14 @@ export class Preloader extends Scene
             repeat: -1
         });
 
+        // Generate shelter block texture
         const gfx = this.make.graphics({ x: 0, y: 0, add: false });
         gfx.fillStyle(0xffffff, 1);
         gfx.fillRect(0, 0, 30, 30);
         gfx.generateTexture('ShelterBlock', 30, 30);
         gfx.destroy();
 
-        //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
+        // Start main menu scene
         this.scene.start('MainMenu');
     }
 }
