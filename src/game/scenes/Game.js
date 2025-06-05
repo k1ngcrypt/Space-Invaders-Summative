@@ -51,11 +51,14 @@ export class Game extends Scene {
         });
 
         this.playerBullets = this.physics.add.group();
-
+        this.bulletDb = true;
         this.input.keyboard.on('keydown-SPACE', () => {
-            const bullet = this.playerBullets.create(this.player.x, this.player.y, 'Projectile_Player');
-            bullet.setScale(window.innerWidth / 800, window.innerHeight / 800);
-            bullet.setVelocityY(-1000);
+            if (this.bulletDb) {
+                const bullet = this.playerBullets.create(this.player.x, this.player.y, 'Projectile_Player');
+                bullet.setScale(window.innerWidth / 800, window.innerHeight / 800);
+                bullet.setVelocityY(-1000);
+                this.bulletDb = false;
+            }
         });
 
         this.physics.add.collider(this.enemyGroup, this.playerBullets, onEnemyHit, null, this);
@@ -73,6 +76,7 @@ export class Game extends Scene {
                     + 30
                 )
             );
+            this.bulletDb = true;
             this.events.emit('updateScore', this.score);
         }
 
@@ -187,5 +191,20 @@ export class Game extends Scene {
         if (hitEdge) {
             this.enemyDirection *= -1;
         }
+
+        // Destroy player bullets that go off screen
+        this.playerBullets.getChildren().forEach(bullet => {
+            if (bullet.y < 0) {
+                bullet.destroy();
+                this.bulletDb = true;
+            }
+        });
+
+        // Destroy enemy projectiles that go off screen
+        this.enemyProjectiles.getChildren().forEach(bullet => {
+            if (bullet.y > this.sys.game.config.height) {
+                bullet.destroy();
+            }
+        });
     }
 }
