@@ -9,7 +9,7 @@ export class Game extends Scene {
     }
 
     create() {
-        let score = 0;
+        score = 0;
         this.lives = 3;
         const enemies = ['A', 'B', 'B', 'C', 'C'];
 
