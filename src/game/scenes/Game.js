@@ -9,7 +9,7 @@ export class Game extends Scene {
     }
 
     create() {
-        score = 0;
+        this.score = 0;
         this.lives = 3;
         const enemies = ['A', 'B', 'B', 'C', 'C'];
 
@@ -64,7 +64,7 @@ export class Game extends Scene {
         function onEnemyHit(enemy, bullet) {
             enemy.destroy();
             bullet.destroy();
-            score += Math.round(
+            this.score += Math.round(
                 (
                     (1 / 6) * (enemy.type ** 5)
                     - (15 / 2) * (enemy.type ** 3)
@@ -73,7 +73,7 @@ export class Game extends Scene {
                     + 30
                 )
             );
-            this.events.emit('updateScore', score);
+            this.events.emit('updateScore', this.score);
         }
 
         const scoreText = this.add.text(
@@ -118,7 +118,8 @@ export class Game extends Scene {
             updateLivesDisplay(); // Update lives text when hit
             if (this.lives < 1) {
                 player.destroy();
-                this.scene.start('Lose', { "score": score });
+                this.scene.start('Lose');
+                this.registry.set('score', this.score);
             }
         });
 

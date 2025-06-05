@@ -6,9 +6,6 @@ export class Win extends Scene
     {
         super('Win');
     }
-init(){
-    this.score = score;
-}
     create ()
     {
         this.cameras.main.setBackgroundColor(0xff0000);

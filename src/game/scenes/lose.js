@@ -6,14 +6,11 @@ export class Lose extends Scene
     {
         super('Lose');
     }
-init(){
-    this.score = score;
-}
     create ()
     {
         this.cameras.main.setBackgroundColor(0xff0000);
 
-        this.add.text(512, 384, ('Score: '+String(score)), {
+        this.add.text(512, 384, ('Score: '+String(this.registry.get('score'))), {
             fontFamily: 'Workbench', fontSize: 64, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
