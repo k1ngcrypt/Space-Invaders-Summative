@@ -19,10 +19,10 @@ init(){
             align: 'center'
         }).setOrigin(0.5);
 
-        this.input.once('pointerdown', () => {
-
+const spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        spaceKey.on('down', () => {
             this.scene.start('MainMenu');
-
         });
+
     }
 }
