@@ -31,7 +31,7 @@ export class Game extends Scene {
 
         this.enemyGroup.scaleXY(window.innerWidth / 800, window.innerHeight / 800);
         //player
-        this.player = this.physics.add.sprite(window.innerWidth / 2, window.innerHeight / 1.5, 'Player');
+        this.player = this.physics.add.sprite(window.innerWidth / 2, window.innerHeight / 1.2, 'Player');
         this.player.setScale(window.innerWidth / 800, window.innerHeight / 800);
         this.player.setCollideWorldBounds(true);
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -125,17 +125,25 @@ export class Game extends Scene {
 
         // Create shelters
         this.shelterBlocks = this.physics.add.staticGroup();
-        const shelterPositions = [window.innerWidth / 4, window.innerWidth / 2, window.innerWidth * 3 / 4]; //X positions
+        // Calculate 4 evenly spaced shelter positions
+        const numShelters = 4;
+        const shelterWidth = 5 * 30; // 5 blocks wide, 30px each
+        const spacing = (window.innerWidth - numShelters * shelterWidth) / (numShelters + 1);
+        const shelterPositions = [];
+        for (let i = 0; i < numShelters; i++) {
+            shelterPositions.push(spacing + i * (shelterWidth + spacing));
+        }
+
         shelterPositions.forEach(x => {
             for (let i = 0; i < 5; i++) { // width
-                for (let j = 0; j < 3; j++) { // height
-                    const block = this.shelterBlocks.create(
-                        x + i * 30, // adjust spacing as needed
-                        window.innerHeight / 1.2 + j * 30,
-                        'ShelterBlock'
-                    );
-                    block.setOrigin(0.5, 0.5);
-                }
+            for (let j = 0; j < 3; j++) { // height
+                const block = this.shelterBlocks.create(
+                x + i * 30,
+                window.innerHeight / 1.5 + j * 30,
+                'ShelterBlock'
+                );
+                block.setOrigin(0.5, 0.5);
+            }
             }
         });
 
