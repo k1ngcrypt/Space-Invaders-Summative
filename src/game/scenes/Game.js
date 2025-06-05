@@ -155,6 +155,7 @@ export class Game extends Scene {
         this.physics.add.collider(this.playerBullets, this.shelterBlocks, (bullet, block) => {
             bullet.destroy();
             block.destroy(); // Remove block to create a gap
+            this.bulletDb = true;
         });
 
         // Collide enemy bullets with shelter blocks
