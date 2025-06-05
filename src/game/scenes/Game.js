@@ -55,7 +55,7 @@ export class Game extends Scene {
         this.input.keyboard.on('keydown-SPACE', () => {
             const bullet = this.playerBullets.create(this.player.x, this.player.y, 'Projectile_Player');
             bullet.setScale(window.innerWidth / 800, window.innerHeight / 800);
-            bullet.setVelocityY(-500);
+            bullet.setVelocityY(-1000);
         });
 
         this.physics.add.collider(this.enemyGroup, this.playerBullets, onEnemyHit, null, this);
@@ -124,13 +124,13 @@ export class Game extends Scene {
 
         // Create shelters
         this.shelterBlocks = this.physics.add.staticGroup();
-        const shelterPositions = [200, 400, 600]; //X positions
+        const shelterPositions = [window.innerWidth / 4, window.innerWidth / 2, window.innerWidth * 3 / 4]; //X positions
         shelterPositions.forEach(x => {
-            for (let i = 0; i < 8; i++) { // width
-                for (let j = 0; j < 4; j++) { // height
+            for (let i = 0; i < 5; i++) { // width
+                for (let j = 0; j < 3; j++) { // height
                     const block = this.shelterBlocks.create(
-                        x + i * 8, // adjust spacing as needed
-                        window.innerHeight / 1.2 + j * 8,
+                        x + i * 30, // adjust spacing as needed
+                        window.innerHeight / 1.2 + j * 30,
                         'ShelterBlock'
                     );
                     block.setOrigin(0.5, 0.5);
@@ -164,7 +164,7 @@ export class Game extends Scene {
                     `Projectile${enemy.name}_1`
                 );
                 projectile.setScale(window.innerWidth / 400, window.innerHeight / 400);
-                projectile.setVelocityY(200);
+                projectile.setVelocityY(800);
                 projectile.play(`Projectile${enemy.name}-Animation`);
             }
         });

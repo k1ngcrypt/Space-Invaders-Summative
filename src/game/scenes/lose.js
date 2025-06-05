@@ -1,10 +1,10 @@
 import { Scene } from 'phaser';
 
-export class GameOver extends Scene
+export class Lose extends Scene
 {
     constructor ()
     {
-        super('GameOver');
+        super('Lose');
     }
 init(){
     this.score = score;

@@ -1,14 +1,11 @@
 import { Scene } from 'phaser';
 
-export class Preloader extends Scene
-{
-    constructor ()
-    {
+export class Preloader extends Scene {
+    constructor() {
         super('Preloader');
     }
 
-    preload ()
-    {
+    preload() {
         // Center coordinates
         const centerX = this.cameras.main.width / 2;
         const centerY = this.cameras.main.height / 2;
@@ -83,31 +80,30 @@ export class Preloader extends Scene
         this.load.image('ProjectileC_4', 'ProjectileC_4.png');
     }
 
-    create ()
-    {
+    create() {
         //global anims
         this.anims.create({
             key: 'A-Animation',
-            frames: [{key: 'A1'}, {key: 'A2'}],
+            frames: [{ key: 'A1' }, { key: 'A2' }],
             frameRate: 3,
             repeat: -1
         });
         this.anims.create({
             key: 'B-Animation',
-            frames: [{key: 'B1'}, {key: 'B2'}],
+            frames: [{ key: 'B1' }, { key: 'B2' }],
             frameRate: 3,
             repeat: -1
         });
         this.anims.create({
             key: 'C-Animation',
-            frames: [{key: 'C1'}, {key: 'C2'}],
+            frames: [{ key: 'C1' }, { key: 'C2' }],
             frameRate: 3,
             repeat: -1
         });
 
         this.anims.create({
             key: 'Missile-Animation',
-            frames: [{key: 'missile_1'}, {key: 'missile_2'}, {key: 'missile_3'}, {key: 'missile_4'}],
+            frames: [{ key: 'missile_1' }, { key: 'missile_2' }, { key: 'missile_3' }, { key: 'missile_4' }],
             frameRate: 20,
             repeat: -1
         });
@@ -115,10 +111,10 @@ export class Preloader extends Scene
         this.anims.create({
             key: 'ProjectileA-Animation',
             frames: [
-            { key: 'ProjectileA_1' },
-            { key: 'ProjectileA_2' },
-            { key: 'ProjectileA_3' },
-            { key: 'ProjectileA_4' }
+                { key: 'ProjectileA_1' },
+                { key: 'ProjectileA_2' },
+                { key: 'ProjectileA_3' },
+                { key: 'ProjectileA_4' }
             ],
             frameRate: 5,
             repeat: -1
@@ -127,10 +123,10 @@ export class Preloader extends Scene
         this.anims.create({
             key: 'ProjectileB-Animation',
             frames: [
-            { key: 'ProjectileB_1' },
-            { key: 'ProjectileB_2' },
-            { key: 'ProjectileB_3' },
-            { key: 'ProjectileB_4' }
+                { key: 'ProjectileB_1' },
+                { key: 'ProjectileB_2' },
+                { key: 'ProjectileB_3' },
+                { key: 'ProjectileB_4' }
             ],
             frameRate: 5,
             repeat: -1
@@ -139,14 +135,20 @@ export class Preloader extends Scene
         this.anims.create({
             key: 'ProjectileC-Animation',
             frames: [
-            { key: 'ProjectileC_1' },
-            { key: 'ProjectileC_2' },
-            { key: 'ProjectileC_3' },
-            { key: 'ProjectileC_4' }
+                { key: 'ProjectileC_1' },
+                { key: 'ProjectileC_2' },
+                { key: 'ProjectileC_3' },
+                { key: 'ProjectileC_4' }
             ],
             frameRate: 5,
             repeat: -1
         });
+
+        const gfx = this.make.graphics({ x: 0, y: 0, add: false });
+        gfx.fillStyle(0xffffff, 1);
+        gfx.fillRect(0, 0, 30, 30);
+        gfx.generateTexture('ShelterBlock', 30, 30);
+        gfx.destroy();
 
         //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
         this.scene.start('MainMenu');
