@@ -7,6 +7,7 @@ export class Game extends Scene {
         this.enemyDirection = 1; // Enemy movement direction
         this.enemySpeed = 50;    // Enemy speed
         this.lives = 3;          // Player lives
+        this.ufodirection = 1;   // UFO movement direction
     }
 
     create() {
@@ -14,7 +15,7 @@ export class Game extends Scene {
         this.lives = 3;
         const enemies = ['A', 'B', 'B', 'C', 'C'];
 
-        // Create enemies group
+        // Enemy group setup
         this.enemyGroup = this.physics.add.group();
 
         // Spawn enemies in grid
@@ -173,6 +174,57 @@ export class Game extends Scene {
         this.physics.add.collider(this.enemyProjectiles, this.shelterBlocks, (bullet, block) => {
             bullet.destroy();
             block.destroy();
+        });
+
+        // UFO setup
+        this.ufo = this.physics.add.sprite(window.innerWidth, window.innerHeight / 1.2, 'UFO')
+            .setScale(window.innerWidth / 800, window.innerHeight / 800);
+        this.ufo.setVisible(false);
+        this.ufo.setActive(false);
+
+        // UFO movement logic
+        this.scheduleUfoAppearance();
+
+        // UFO hit by player bullet
+        this.physics.add.collider(this.playerBullets, this.ufo, (ufo, bullet) => {
+            bullet.destroy();
+            this.score += 100;
+            this.events.emit('updateScore', this.score);
+            ufo.destroy();
+        });
+    }
+
+    // Schedule UFO appearance
+    scheduleUfoAppearance() {
+        const delay = Phaser.Math.Between(5000, 15000);
+        this.time.delayedCall(delay, () => {
+            this.showUfo();
+        });
+    }
+
+    // Show and move UFO
+    showUfo() {
+        this.ufo.x = -this.ufo.displayWidth / 2;
+        this.ufo.y = window.innerHeight / 12;
+        this.ufo.setVisible(true);
+        this.ufo.setActive(true);
+        this.ufo.setVelocityX(225 * this.ufodirection);
+
+        // Hide UFO after leaving screen
+        this.ufoTimer = this.time.addEvent({
+            delay: 16,
+            callback: () => {
+                if (this.ufo.x > this.sys.game.config.width + this.ufo.displayWidth / 2) {
+                    this.ufo.setVisible(false);
+                    this.ufo.setActive(false);
+                    this.ufo.setVelocityX(0);
+                    this.ufoTimer.remove();
+                    this.ufodirection *= -1;
+                    this.scheduleUfoAppearance();
+                }
+            },
+            callbackScope: this,
+            loop: true
         });
     }
 
