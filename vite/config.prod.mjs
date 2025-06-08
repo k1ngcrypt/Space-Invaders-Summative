@@ -17,7 +17,7 @@ const phasermsg = () => {
 }   
 
 export default defineConfig({
-    base: '/Space-Invaders-Summative',
+    base: '/',
     logLevel: 'warn',
     build: {
         rollupOptions: {
